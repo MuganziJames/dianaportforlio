@@ -1,26 +1,187 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fefefe;
+  --foreground: #1a1a1a;
+  --accent-pink: #ffeef5;
+  --accent-peach: #fff5ee;
+  --text-muted: #666666;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Grid background pattern */
+.grid-background {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    var(--accent-pink) 0%,
+    var(--background) 50%,
+    var(--accent-peach) 100%
+  );
+}
+
+.grid-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 100px 100px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    transparent 20%,
+    black 70%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    transparent 20%,
+    black 70%
+  );
+}
+
+/* Watermark text styling */
+.watermark {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: clamp(150px, 20vw, 300px);
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.03);
+  pointer-events: none;
+  z-index: 0;
+  line-height: 0.8;
+  font-family: var(--font-serif);
+}
+
+/* Custom cursor */
+.custom-cursor {
+  width: 120px;
+  height: 120px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-cursor::after {
+  content: "";
+  width: 4px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  cursor: none;
+}
+
+/* Link styling */
+a,
+button,
+input[type="submit"],
+[role="button"] {
+  cursor: none;
+}
+
+/* Bold inline links */
+.inline-link {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--foreground);
+  transition: opacity 0.2s;
+}
+
+.inline-link:hover {
+  opacity: 0.7;
+}
+
+/* Section bullet point */
+.section-bullet {
+  width: 10px;
+  height: 10px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 12px;
+}
+
+/* Underline link style */
+.underline-link {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Arrow link */
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+  transition: gap 0.3s ease;
+}
+
+.arrow-link:hover {
+  gap: 20px;
+}
+
+/* Form input styling */
+.form-input {
+  width: 100%;
+  padding: 16px 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: transparent;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  border-bottom-color: var(--foreground);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Primary button */
+.btn-primary {
+  background: var(--foreground);
+  color: var(--background);
+  padding: 16px 32px;
+  font-weight: 500;
+  transition: opacity 0.3s;
+}
+
+.btn-primary:hover {
+  opacity: 0.85;
+}
+
+/* Tech tag */
+.tech-tag {
+  font-size: 0.75rem;
+  color: var(--text-muted);
 }
