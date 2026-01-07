@@ -35,7 +35,7 @@ export default function Home() {
               <Link href="/about" className="inline-link mx-1">
                 IMPACT
               </Link>
-              — contributing to scientific evidence used by policymakers.
+              contributing to scientific evidence used by policymakers.
               Interested in collaboration? Feel free to
               <Link href="/contact" className="inline-link mx-1">
                 CONTACT ME
